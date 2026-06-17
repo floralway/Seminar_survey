@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>課後回饋問卷｜找到你的色彩 · 質穎形象顏究室®</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --almond: #EDE3D8;
+    --cream: #F7F3EE;
+    --warm-white: #FAFAF8;
+    --parch: #F4EFE8;
+    --charcoal: #2C2C2C;
+    --bark: #6B5C4E;
+    --muted: #7A756F;
+    --ink-lite: #9A8F86;
+    --border: #DDD8D0;
+    --highlight: #F0EAE1;
+    --orange: #C97B4B;
+    --orange-light: #D9A07A;
+    --error: #B85C4A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--almond);
+    color: var(--charcoal);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* ─── Header ─── */
+  .site-header {
+    background: linear-gradient(135deg, #D08A5C 0%, #C97B4B 55%, #B5663A 100%);
+    color: var(--cream);
+    text-align: center;
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 25% 15%, rgba(255,255,255,0.18) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 90%, rgba(91,46,20,0.25) 0%, transparent 60%);
+  }
+  .brand-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    position: relative; z-index: 1;
+  }
+  .site-header h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 300;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+    color: #FFFFFF;
+    position: relative; z-index: 1;
+  }
+  .site-header p {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.78);
+    letter-spacing: 0.04em;
+    position: relative; z-index: 1;
+  }
+  .site-header .org-line {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.55);
+    margin-top: 0.6rem;
+    letter-spacing: 0.04em;
+    position: relative; z-index: 1;
+  }
+  .deco-line {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.5);
+    margin: 1.25rem auto;
+    position: relative; z-index: 1;
+  }
+
+  /* ─── Progress ─── */
+  .progress-wrap {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .progress-label { font-size: 0.75rem; color: var(--muted); white-space: nowrap; letter-spacing: 0.05em; }
+  .progress-bar-bg { flex: 1; height: 2px; background: var(--border); border-radius: 2px; }
+  .progress-bar-fill { height: 100%; background: var(--orange); border-radius: 2px; width: 0%; transition: width 0.5s ease; }
+  .progress-pct { font-size: 0.75rem; color: var(--orange); min-width: 32px; text-align: right; }
+
+  /* ─── Main ─── */
+  .main { max-width: 680px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* ─── Section Headers ─── */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin: 2.5rem 0 1.75rem; }
+  .section-header:first-of-type { margin-top: 0; }
+  .section-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--orange-light); line-height: 1; min-width: 2rem; }
+  .section-title { font-family: 'Noto Serif TC', serif; font-weight: 400; font-size: 1.05rem; letter-spacing: 0.08em; color: var(--charcoal); }
+  .section-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; letter-spacing: 0.04em; }
+
+  /* ─── Question Card ─── */
+  .q-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 2px; padding: 1.75rem 1.75rem 1.5rem; margin-bottom: 1rem; transition: border-color 0.2s; }
+  .q-card:focus-within { border-color: var(--orange-light); }
+  .q-label { font-size: 0.95rem; font-weight: 400; color: var(--charcoal); margin-bottom: 1.25rem; line-height: 1.7; letter-spacing: 0.03em; }
+  .q-num { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; color: var(--orange); letter-spacing: 0.1em; display: block; margin-bottom: 0.4rem; }
+  .required { color: var(--error); margin-left: 0.15rem; }
+
+  /* ─── Star Rating ─── */
+  .star-scale { display: flex; flex-direction: column; gap: 0.75rem; }
+  .star-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .star-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted); margin-top: 0.25rem; }
+  .rating-btn {
+    width: 44px; height: 44px; border: 1px solid var(--border); background: transparent; border-radius: 2px;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--muted); cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .rating-btn:hover { border-color: var(--orange); color: var(--orange); background: var(--highlight); }
+  .rating-btn.selected { background: var(--charcoal); border-color: var(--charcoal); color: var(--cream); }
+
+  /* NPS 0-10 */
+  .nps-row { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+  .nps-btn {
+    width: 40px; height: 40px; border: 1px solid var(--border); background: transparent; border-radius: 2px;
+    font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--muted); cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nps-btn:hover { border-color: var(--orange); color: var(--orange); background: var(--highlight); }
+  .nps-btn.selected { background: var(--charcoal); border-color: var(--charcoal); color: var(--cream); }
+  .nps-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted); margin-top: 0.4rem; }
+
+  /* ─── Radio / Checkbox ─── */
+  .options-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .option-item {
+    display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 1rem;
+    border: 1px solid var(--border); border-radius: 2px; cursor: pointer; transition: all 0.15s; user-select: none;
+  }
+  .option-item:hover { border-color: var(--orange-light); background: var(--highlight); }
+  .option-item.selected { border-color: var(--charcoal); background: var(--highlight); }
+  .custom-dot {
+    width: 18px; height: 18px; min-width: 18px; border: 1.5px solid var(--border); border-radius: 50%;
+    margin-top: 1px; position: relative; transition: all 0.15s; background: white;
+  }
+  .option-item.selected .custom-dot { border-color: var(--charcoal); background: var(--charcoal); }
+  .option-item.selected .custom-dot::after {
+    content: ''; position: absolute; width: 6px; height: 6px; background: white; border-radius: 50%;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+  }
+  .custom-box {
+    width: 18px; height: 18px; min-width: 18px; border: 1.5px solid var(--border); border-radius: 2px;
+    margin-top: 1px; position: relative; transition: all 0.15s; background: white;
+  }
+  .option-item.selected .custom-box { border-color: var(--charcoal); background: var(--charcoal); }
+  .option-item.selected .custom-box::after {
+    content: '✓'; position: absolute; color: white; font-size: 11px; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); line-height: 1;
+  }
+  .option-text { font-size: 0.9rem; color: var(--charcoal); line-height: 1.6; }
+
+  /* Age range grid */
+  .age-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  @media (max-width: 480px) { .age-grid { grid-template-columns: 1fr; } }
+
+  .other-input {
+    width: 100%; margin-top: 0.5rem; padding: 0.4rem 0; border: none; border-bottom: 1px solid var(--border);
+    background: transparent; font-family: 'Noto Sans TC', sans-serif; font-size: 0.85rem; color: var(--charcoal); outline: none;
+  }
+  .other-input::placeholder { color: var(--muted); }
+  .other-input:focus { border-bottom-color: var(--orange); }
+
+  /* ─── Textarea ─── */
+  textarea {
+    width: 100%; border: 1px solid var(--border); border-radius: 2px; padding: 0.9rem 1rem;
+    font-family: 'Noto Sans TC', sans-serif; font-size: 0.88rem; color: var(--charcoal); background: white;
+    resize: vertical; min-height: 90px; line-height: 1.8; outline: none; transition: border-color 0.2s;
+  }
+  textarea:focus { border-color: var(--orange-light); }
+  textarea::placeholder { color: var(--muted); }
+
+  /* ─── Conversion highlight card ─── */
+  .convert-card {
+    background: linear-gradient(135deg, var(--highlight) 0%, var(--cream) 100%);
+    border: 1px solid var(--orange-light);
+  }
+  .convert-badge {
+    display: inline-block; font-size: 0.68rem; color: var(--orange); border: 1px solid var(--orange-light);
+    padding: 0.2rem 0.6rem; border-radius: 20px; letter-spacing: 0.06em; margin-bottom: 0.9rem;
+  }
+
+  /* ─── Consent ─── */
+  .consent-box { background: var(--highlight); border: 1px solid var(--border); border-radius: 2px; padding: 1.5rem; }
+  .consent-options { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+  .consent-btn {
+    flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: 1.5px solid var(--border); background: white;
+    border-radius: 2px; font-family: 'Noto Sans TC', sans-serif; font-size: 0.9rem; cursor: pointer; transition: all 0.15s;
+    color: var(--charcoal); text-align: center;
+  }
+  .consent-btn:hover { border-color: var(--orange); }
+  .consent-btn.selected-yes { background: var(--charcoal); border-color: var(--charcoal); color: white; }
+  .consent-btn.selected-no { background: white; border-color: var(--muted); color: var(--muted); }
+  .consent-items { list-style: none; margin: 0.75rem 0 0; }
+  .consent-items li { font-size: 0.82rem; color: var(--muted); padding: 0.2rem 0; padding-left: 1rem; position: relative; }
+  .consent-items li::before { content: '·'; position: absolute; left: 0; color: var(--orange-light); }
+
+  /* ─── Submit ─── */
+  .submit-wrap { margin-top: 3rem; text-align: center; }
+  .submit-btn {
+    background: var(--charcoal); color: var(--cream); border: none; padding: 1rem 3rem;
+    font-family: 'Noto Serif TC', serif; font-weight: 400; font-size: 1rem; letter-spacing: 0.15em;
+    cursor: pointer; transition: all 0.2s; border-radius: 2px;
+  }
+  .submit-btn:hover { background: var(--orange); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+  .submit-btn:disabled { opacity: 0.6; cursor: default; }
+  .submit-note { font-size: 0.75rem; color: var(--muted); margin-top: 1rem; letter-spacing: 0.03em; }
+
+  /* ─── Thank You ─── */
+  .thank-you { display: none; text-align: center; padding: 4rem 2rem 5rem; max-width: 560px; margin: 0 auto; }
+  .thank-you.show { display: block; }
+  .ty-icon { font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--orange); }
+  .ty-title { font-family: 'Noto Serif TC', serif; font-weight: 300; font-size: 1.5rem; letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .ty-text { font-size: 0.9rem; color: var(--muted); line-height: 1.9; }
+  .ty-brand { margin-top: 2.5rem; font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; letter-spacing: 0.2em; color: var(--orange-light); text-transform: uppercase; }
+
+  /* CTA box in thank you (conversion) */
+  .ty-cta-box {
+    display: none;
+    margin: 2rem 0;
+    background: var(--charcoal);
+    border-radius: 2px;
+    padding: 2rem 1.75rem;
+    text-align: center;
+  }
+  .ty-cta-box.show { display: block; }
+  .ty-cta-eyebrow { font-family: 'Cormorant Garamond', serif; font-size: 0.78rem; letter-spacing: 0.2em; color: var(--orange-light); text-transform: uppercase; margin-bottom: 0.75rem; }
+  .ty-cta-title { font-family: 'Noto Serif TC', serif; font-weight: 300; font-size: 1.2rem; color: var(--cream); line-height: 1.7; margin-bottom: 1.25rem; }
+  .ty-cta-btn {
+    display: inline-block; background: var(--orange); color: white; padding: 0.85rem 2.2rem;
+    font-family: 'Noto Serif TC', serif; font-size: 0.92rem; letter-spacing: 0.08em; text-decoration: none;
+    border-radius: 2px; transition: all 0.2s;
+  }
+  .ty-cta-btn:hover { background: var(--orange-light); }
+  .ty-cta-sub { font-size: 0.74rem; color: rgba(247,243,238,0.5); margin-top: 1rem; letter-spacing: 0.04em; }
+
+  /* ─── Validation ─── */
+  .error-msg { font-size: 0.75rem; color: var(--error); margin-top: 0.4rem; display: none; }
+  .q-card.has-error { border-color: var(--error); }
+  .q-card.has-error .error-msg { display: block; }
+
+  .section-divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  @media (max-width: 480px) {
+    .rating-btn { width: 40px; height: 40px; }
+    .nps-btn { width: 34px; height: 34px; font-size: 0.85rem; }
+    .nps-row { gap: 0.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="brand-mark">質穎形象顏究室® · Floral Way Image Studio</div>
+  <div class="deco-line"></div>
+  <h1>找到你的色彩 · 課後回饋問卷</h1>
+  <p>關於今天的課程，希望妳可以幫忙寫下這份問卷</p>
+  <p class="org-line">臺中市政府社會局　主辦　·　靜宜大學　協辦</p>
+</header>
+
+<!-- Progress -->
+<div class="progress-wrap">
+  <span class="progress-label">填寫進度</span>
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+  <span class="progress-pct" id="progressPct">0%</span>
+</div>
+
+<!-- Form -->
+<main class="main" id="surveyForm">
+
+  <!-- Section 0 -->
+  <div class="section-header">
+    <span class="section-num">·</span>
+    <div>
+      <div class="section-title">基本資料</div>
+      <div class="section-sub">幫助我們了解今天參與課程的妳</div>
+    </div>
+  </div>
+
+  <div class="q-card" id="card-age">
+    <span class="q-num">基本資料</span>
+    <div class="q-label">妳的年齡區間是？<span class="required">*</span></div>
+    <div class="age-grid" id="age-options">
+      <label class="option-item" onclick="selectRadio(this,'age')"><input type="radio" name="age" value="18以下" style="display:none"><span class="custom-dot"></span><span class="option-text">18 以下</span></label>
+      <label class="option-item" onclick="selectRadio(this,'age')"><input type="radio" name="age" value="18-24" style="display:none"><span class="custom-dot"></span><span class="option-text">18–24</span></label>
+      <label class="option-item" onclick="selectRadio(this,'age')"><input type="radio" name="age" value="25-34" style="display:none"><span class="custom-dot"></span><span class="option-text">25–34</span></label>
+      <label class="option-item" onclick="selectRadio(this,'age')"><input type="radio" name="age" value="35-44" style="display:none"><span class="custom-dot"></span><span class="option-text">35–44</span></label>
+      <label class="option-item" onclick="selectRadio(this,'age')"><input type="radio" name="age" value="45-54" style="display:none"><span class="custom-dot"></span><span class="option-text">45–54</span></label>
+      <label class="option-item" onclick="selectRadio(this,'age')"><input type="radio" name="age" value="55-64" style="display:none"><span class="custom-dot"></span><span class="option-text">55–64</span></label>
+      <label class="option-item" onclick="selectRadio(this,'age')"><input type="radio" name="age" value="65以上" style="display:none"><span class="custom-dot"></span><span class="option-text">65 以上</span></label>
+    </div>
+    <div class="error-msg">請選擇年齡區間</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Section I -->
+  <div class="section-header">
+    <span class="section-num">I</span>
+    <div>
+      <div class="section-title">課前 vs 課後的轉變</div>
+      <div class="section-sub">找到適合自己的顏色，清晰程度的改變</div>
+    </div>
+  </div>
+
+  <div class="q-card" id="card-q1">
+    <span class="q-num">Q 01</span>
+    <div class="q-label">上課<strong>前</strong>，你對「個人色彩」的了解程度是？<span class="required">*</span></div>
+    <div class="star-scale">
+      <div class="star-row" id="q1-row">
+        <button type="button" class="rating-btn" onclick="selectRating('q1',1)">1</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q1',2)">2</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q1',3)">3</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q1',4)">4</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q1',5)">5</button>
+      </div>
+      <div class="star-labels"><span>完全不了解</span><span>非常了解</span></div>
+    </div>
+    <div class="error-msg">請選擇一個分數</div>
+  </div>
+
+  <div class="q-card" id="card-q2">
+    <span class="q-num">Q 02</span>
+    <div class="q-label">上完課<strong>後</strong>，你對「個人色彩」的了解程度是？<span class="required">*</span></div>
+    <div class="star-scale">
+      <div class="star-row" id="q2-row">
+        <button type="button" class="rating-btn" onclick="selectRating('q2',1)">1</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q2',2)">2</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q2',3)">3</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q2',4)">4</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q2',5)">5</button>
+      </div>
+      <div class="star-labels"><span>完全不了解</span><span>非常了解</span></div>
+    </div>
+    <div class="error-msg">請選擇一個分數</div>
+  </div>
+
+  <div class="q-card" id="card-q3">
+    <span class="q-num">Q 03</span>
+    <div class="q-label">上完這堂課，你覺得自己<strong>最大的改變</strong>是什麼？<span class="required">*</span></div>
+    <textarea id="q3" placeholder="請用自己的話分享……" oninput="updateProgress()"></textarea>
+    <div class="error-msg">請填寫這題</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Section II -->
+  <div class="section-header">
+    <span class="section-num">II</span>
+    <div>
+      <div class="section-title">認知翻轉</div>
+      <div class="section-sub">哪一個內容讓你最有感？</div>
+    </div>
+  </div>
+
+  <div class="q-card" id="card-q4">
+    <span class="q-num">Q 04</span>
+    <div class="q-label">這堂課最讓你印象深刻、<strong>顛覆原本想法</strong>的是？（可複選）</div>
+    <div class="options-list" id="q4-options">
+      <div class="option-item" data-value="顏色不是只分冷色暖色這麼簡單" onclick="toggleCheckbox(this,'q4')"><span class="custom-box"></span><span class="option-text">原來顏色不是只分「冷色系／暖色系」這麼簡單</span></div>
+      <div class="option-item" data-value="網路測驗不一定準" onclick="toggleCheckbox(this,'q4')"><span class="custom-box"></span><span class="option-text">網路上的「30秒測出你的季節」其實不一定準</span></div>
+      <div class="option-item" data-value="顏色沒有禁區只有適合的版本" onclick="toggleCheckbox(this,'q4')"><span class="custom-box"></span><span class="option-text">顏色沒有「禁區」，只有屬於自己的版本</span></div>
+      <div class="option-item" data-value="親眼看到專業測色的真實變化" onclick="toggleCheckbox(this,'q4')"><span class="custom-box"></span><span class="option-text">親眼看到專業測色在臉上的真實變化</span></div>
+      <div class="option-item" data-value="other-q4" id="q4-other-item" onclick="toggleCheckbox(this,'q4')">
+        <span class="custom-box"></span>
+        <span class="option-text">其他：<input type="text" class="other-input" id="q4-other-text" placeholder="請填寫……" onclick="event.stopPropagation()" oninput="updateProgress()"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" id="card-q5">
+    <span class="q-num">Q 05</span>
+    <div class="q-label">有沒有哪一刻，讓你有「<strong>原來是這樣！</strong>」的感覺？</div>
+    <textarea id="q5" placeholder="分享你的 aha moment……" oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Section III -->
+  <div class="section-header">
+    <span class="section-num">III</span>
+    <div>
+      <div class="section-title">最有感的收穫</div>
+      <div class="section-sub">這堂課，哪一句話最打中你？</div>
+    </div>
+  </div>
+
+  <div class="q-card" id="card-q6">
+    <span class="q-num">Q 06</span>
+    <div class="q-label">上完課後，你覺得<strong>幫助最大的是</strong>？<span class="required">*</span></div>
+    <div class="options-list" id="q6-options">
+      <label class="option-item" onclick="selectRadio(this,'q6')"><input type="radio" name="q6" value="知道為什麼我有時候穿某些顏色很怪" style="display:none"><span class="custom-dot"></span><span class="option-text">「知道為什麼我有時候穿某些顏色很怪的」</span></label>
+      <label class="option-item" onclick="selectRadio(this,'q6')"><input type="radio" name="q6" value="能夠知道可以怎麼挑彩妝品" style="display:none"><span class="custom-dot"></span><span class="option-text">「能夠知道我可以怎麼樣挑彩妝品了」</span></label>
+      <label class="option-item" onclick="selectRadio(this,'q6')"><input type="radio" name="q6" value="原來個人色彩不是智商稅" style="display:none"><span class="custom-dot"></span><span class="option-text">「原來個人色彩不是智商稅」</span></label>
+      <label class="option-item" onclick="selectRadio(this,'q6')"><input type="radio" name="q6" value="other-q6" style="display:none"><span class="custom-dot"></span><span class="option-text">其他：<input type="text" class="other-input" id="q6-other-text" placeholder="請填寫……" onclick="event.stopPropagation()" oninput="updateProgress()"></span></label>
+    </div>
+    <div class="error-msg">請選擇一項</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Section IV -->
+  <div class="section-header">
+    <span class="section-num">IV</span>
+    <div>
+      <div class="section-title">課程價值</div>
+      <div class="section-sub">具體感受這堂課帶來的幫助</div>
+    </div>
+  </div>
+
+  <div class="q-card" id="card-q8">
+    <span class="q-num">Q 07</span>
+    <div class="q-label">這堂課的<strong>實用程度</strong>為？<span class="required">*</span></div>
+    <div class="star-scale">
+      <div class="star-row" id="q8-row">
+        <button type="button" class="rating-btn" onclick="selectRating('q8',1)">1</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q8',2)">2</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q8',3)">3</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q8',4)">4</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q8',5)">5</button>
+      </div>
+      <div class="star-labels"><span>完全不實用</span><span>非常實用</span></div>
+    </div>
+    <div class="error-msg">請選擇一個分數</div>
+  </div>
+
+  <div class="q-card" id="card-q10">
+    <span class="q-num">Q 08</span>
+    <div class="q-label">你覺得老師的<strong>講解清楚</strong>嗎？<span class="required">*</span></div>
+    <div class="star-scale">
+      <div class="star-row" id="q10-row">
+        <button type="button" class="rating-btn" onclick="selectRating('q10',1)">1</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q10',2)">2</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q10',3)">3</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q10',4)">4</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q10',5)">5</button>
+      </div>
+      <div class="star-labels"><span>完全不清楚</span><span>非常清楚</span></div>
+    </div>
+    <div class="error-msg">請選擇一個分數</div>
+  </div>
+
+  <div class="q-card" id="card-q9">
+    <span class="q-num">Q 09</span>
+    <div class="q-label">你還會想要再參加<strong>老師主講的相關課程</strong>嗎？<span class="required">*</span></div>
+    <div class="star-scale">
+      <div class="star-row" id="q9-row">
+        <button type="button" class="rating-btn" onclick="selectRating('q9',1)">1</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q9',2)">2</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q9',3)">3</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q9',4)">4</button>
+        <button type="button" class="rating-btn" onclick="selectRating('q9',5)">5</button>
+      </div>
+      <div class="star-labels"><span>完全不會</span><span>非常願意</span></div>
+    </div>
+    <div class="error-msg">請選擇一個分數</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Section V — CONVERSION -->
+  <div class="section-header">
+    <span class="section-num">V</span>
+    <div>
+      <div class="section-title">有些穿搭疑惑，不方便現場問</div>
+      <div class="section-sub">讓妳的困擾，被好好理解、好好回答</div>
+    </div>
+  </div>
+
+  <div class="q-card convert-card" id="card-q11">
+    <span class="convert-badge">✿ 限定提供</span>
+    <span class="q-num">Q 10</span>
+    <div class="q-label">如果有機會<strong>免費獲得老師一對一線上預諮詢</strong>，透過老師的專業幫你目前穿搭困擾和需求提出建議，你會想要嗎？<span class="required">*</span></div>
+    <div class="options-list" id="q11-options">
+      <label class="option-item" onclick="selectRadio(this,'q11')"><input type="radio" name="q11" value="想要！我要預約" style="display:none"><span class="custom-dot"></span><span class="option-text">想要！我要預約 🎁</span></label>
+      <label class="option-item" onclick="selectRadio(this,'q11')"><input type="radio" name="q11" value="有興趣但還要再想想" style="display:none"><span class="custom-dot"></span><span class="option-text">有興趣，但還要再想想</span></label>
+      <label class="option-item" onclick="selectRadio(this,'q11')"><input type="radio" name="q11" value="目前不需要" style="display:none"><span class="custom-dot"></span><span class="option-text">目前不需要</span></label>
+    </div>
+    <div class="error-msg">請選擇一項</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Section VI -->
+  <div class="section-header">
+    <span class="section-num">VI</span>
+    <div>
+      <div class="section-title">你願意推薦嗎？</div>
+      <div class="section-sub">最直接的信任度指標</div>
+    </div>
+  </div>
+
+  <div class="q-card" id="card-q12">
+    <span class="q-num">Q 11</span>
+    <div class="q-label">你有多大<strong>意願推薦這堂課</strong>給朋友或家人？<span class="required">*</span>
+    <br><small style="color:var(--muted);font-size:0.78rem;">0 = 完全不會推薦　　10 = 非常願意推薦</small></div>
+    <div class="nps-row" id="q12-row">
+      <button type="button" class="nps-btn" onclick="selectNPS('q12',0)">0</button>
+      <button type="button" class="nps-btn" onclick="selectNPS('q12',1)">1</button>
+      <button type="button" class="nps-btn" onclick="selectNPS('q12',2)">2</button>
+      <button type="button" class="nps-btn" onclick="selectNPS('q12',3)">3</button>
+      <button type="button" class="nps-btn" onclick="selectNPS('q12',4)">4</button>
+      <button type="button" class="nps-btn" onclick="selectNPS('q12',5)">5</button>
+      <button type="button" class="nps-btn" onclick="selectNPS('q12',6)">6</button>
+      <button type="button" class="nps-btn" onclick="selectNPS('q12',7)">7</button>
+      <button type="button" class="nps-btn" onclick="selectNPS('q12',8)">8</button>
+      <button type="button" class="nps-btn" onclick="selectNPS('q12',9)">9</button>
+      <button type="button" class="nps-btn" onclick="selectNPS('q12',10)">10</button>
+    </div>
+    <div class="nps-labels"><span>完全不會</span><span>非常願意</span></div>
+    <div class="error-msg">請選擇一個分數</div>
+  </div>
+
+  <div class="q-card" id="card-q13">
+    <span class="q-num">Q 12</span>
+    <div class="q-label">如果要你用<strong>一句話</strong>推薦這堂課，你會怎麼說？<span class="required">*</span></div>
+    <textarea id="q13" rows="2" style="min-height:70px" placeholder="你的一句話，也許是下一個人踏出改變的理由……" oninput="updateProgress()"></textarea>
+    <div class="error-msg">請填寫這題</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Section VII -->
+  <div class="section-header">
+    <span class="section-num">VII</span>
+    <div>
+      <div class="section-title">授權聲明</div>
+      <div class="section-sub">你的同意，讓這份回饋走得更遠</div>
+    </div>
+  </div>
+
+  <div class="q-card" id="card-q14">
+    <span class="q-num">Q 13</span>
+    <div class="q-label">是否同意將你的回饋內容<strong>匿名用於</strong>以下用途？<span class="required">*</span></div>
+    <div class="consent-box">
+      <ul class="consent-items">
+        <li>臺中市政府社會局／靜宜大學 成果報告</li>
+        <li>Floral Way 官方 IG／網站分享</li>
+        <li>課程宣傳素材</li>
+      </ul>
+      <div class="consent-options">
+        <button type="button" class="consent-btn" id="consent-yes" onclick="selectConsent('yes')">✓ 同意匿名使用</button>
+        <button type="button" class="consent-btn" id="consent-no" onclick="selectConsent('no')">不同意</button>
+      </div>
+    </div>
+    <div class="error-msg">請選擇是否同意</div>
+  </div>
+
+  <!-- Submit -->
+  <div class="submit-wrap">
+    <button type="button" class="submit-btn" onclick="submitForm()">送出回饋</button>
+    <p class="submit-note">填寫約需 3～5 分鐘 · 所有回答均保密處理</p>
+  </div>
+
+</main>
+
+<!-- Thank You -->
+<div class="thank-you" id="thankYou">
+  <div class="ty-icon">✿</div>
+  <div class="ty-title">謝謝妳的回饋</div>
+  <p class="ty-text">
+    今天最美的顏色，是妳自己。<br>
+    每一個字，我都會認真讀。
+  </p>
+
+  <!-- Conversion CTA — only shown if Q11 = 想要！我要預約 -->
+  <div class="ty-cta-box" id="tyCtaBox">
+    <div class="ty-cta-eyebrow">專屬妳的禮物</div>
+    <div class="ty-cta-title">免費一對一線上預諮詢<br>已經為妳保留名額</div>
+    <a href="https://calendly.com/floralway-image/30min" target="_blank" class="ty-cta-btn">立即預約 →</a>
+    <div class="ty-cta-sub">30 分鐘線上或實體諮詢 · 完全免費</div>
+  </div>
+
+  <div class="ty-brand">質穎形象顏究室® · Floral Way Image Studio</div>
+</div>
+
+<script>
+  // ★ 貼上你的 Google Apps Script 網址
+  const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+  const answers = {
+    age: null, q1: null, q2: null, q3: '', q4: [], q5: '',
+    q6: null, q8: null, q9: null, q10: null,
+    q11: null, q12: null, q13: '', consent: null
+  };
+
+  const REQUIRED = ['age','q1','q2','q3','q6','q8','q9','q10','q11','q12','q13','consent'];
+
+  function selectRating(q, v) {
+    answers[q] = v;
+    const row = document.getElementById(`${q}-row`);
+    row.querySelectorAll('.rating-btn').forEach((btn, i) => btn.classList.toggle('selected', (i+1) === v));
+    clearError(`card-${q}`);
+    updateProgress();
+  }
+
+  function selectNPS(q, v) {
+    answers[q] = v;
+    document.querySelectorAll(`#${q}-row .nps-btn`).forEach((btn, i) => btn.classList.toggle('selected', i === v));
+    clearError(`card-${q}`);
+    updateProgress();
+  }
+
+  function selectRadio(el, q) {
+    const val = el.querySelector('input').value;
+    answers[q] = val;
+    const wrapId = q === 'age' ? 'age-options' : `${q}-options`;
+    document.querySelectorAll(`#${wrapId} .option-item`).forEach(item => item.classList.remove('selected'));
+    el.classList.add('selected');
+    clearError(q === 'age' ? 'card-age' : `card-${q}`);
+    updateProgress();
+  }
+
+  function toggleCheckbox(el, q) {
+    const val = el.dataset.value;
+    const isSelected = el.classList.contains('selected');
+    if (isSelected) {
+      el.classList.remove('selected');
+      answers[q] = answers[q].filter(v => v !== val);
+    } else {
+      el.classList.add('selected');
+      if (!answers[q].includes(val)) answers[q].push(val);
+    }
+    updateProgress();
+  }
+
+  function selectConsent(v) {
+    answers.consent = v;
+    document.getElementById('consent-yes').className = 'consent-btn' + (v==='yes' ? ' selected-yes' : '');
+    document.getElementById('consent-no').className = 'consent-btn' + (v==='no' ? ' selected-no' : '');
+    clearError('card-q14');
+    updateProgress();
+  }
+
+  function clearError(cardId) { document.getElementById(cardId)?.classList.remove('has-error'); }
+
+  function updateProgress() {
+    answers.q3  = document.getElementById('q3')?.value.trim()  || '';
+    answers.q5  = document.getElementById('q5')?.value.trim()  || '';
+    answers.q13 = document.getElementById('q13')?.value.trim() || '';
+
+    let filled = 0;
+    REQUIRED.forEach(k => {
+      const v = answers[k];
+      if (k === 'q3' || k === 'q13') { if (v && v.length > 0) filled++; }
+      else if (k === 'consent') { if (v !== null) filled++; }
+      else { if (v !== null && v !== undefined) filled++; }
+    });
+    const pct = Math.round((filled / REQUIRED.length) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+  }
+
+  const fieldMap = {
+    age: 'card-age', q1: 'card-q1', q2: 'card-q2', q3: 'card-q3',
+    q6: 'card-q6', q8: 'card-q8', q9: 'card-q9', q10: 'card-q10',
+    q11: 'card-q11', q12: 'card-q12', q13: 'card-q13', consent: 'card-q14'
+  };
+
+  function submitForm() {
+    answers.q3  = document.getElementById('q3')?.value.trim()  || '';
+    answers.q13 = document.getElementById('q13')?.value.trim() || '';
+
+    let valid = true;
+    REQUIRED.forEach(k => {
+      const v = answers[k];
+      let filled = false;
+      if (k === 'q3' || k === 'q13') filled = v && v.length > 0;
+      else if (k === 'consent') filled = v !== null;
+      else filled = v !== null && v !== undefined;
+
+      const cardId = fieldMap[k];
+      if (!filled) { document.getElementById(cardId)?.classList.add('has-error'); valid = false; }
+      else { document.getElementById(cardId)?.classList.remove('has-error'); }
+    });
+
+    if (!valid) {
+      const firstError = document.querySelector('.q-card.has-error');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = '送出中……';
+    btn.disabled = true;
+
+    const q4Other = document.getElementById('q4-other-text')?.value.trim();
+    const q4Final = answers.q4.map(v => v === 'other-q4' ? (q4Other ? '其他：' + q4Other : '其他') : v);
+
+    const q6Other = document.getElementById('q6-other-text')?.value.trim();
+    const q6Final = answers.q6 === 'other-q6' ? (q6Other ? '其他：' + q6Other : '其他') : answers.q6;
+
+    const payload = {
+      timestamp: new Date().toLocaleString('zh-TW', {timeZone:'Asia/Taipei'}),
+      age_range: answers.age,
+      q1_before: answers.q1,
+      q2_after: answers.q2,
+      q3_biggest_change: answers.q3,
+      q4_mindset_shift: q4Final.join('、'),
+      q5_aha: answers.q5,
+      q6_biggest_help_choice: q6Final,
+      q8_practical: answers.q8,
+      q9_retake_course: answers.q9,
+      q10_clarity: answers.q10,
+      q11_consult_interest: answers.q11,
+      q12_nps: answers.q12,
+      q13_quote: answers.q13,
+      q14_consent: answers.consent === 'yes' ? '同意' : '不同意'
+    };
+
+    fetch(SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(() => showThankYou())
+    .catch(() => showThankYou());
+  }
+
+  function showThankYou() {
+    document.getElementById('surveyForm').style.display = 'none';
+    document.querySelector('.progress-wrap').style.display = 'none';
+
+    // ★ 轉換邏輯：若學員選擇「想要！我要預約」，顯示預約 CTA
+    if (answers.q11 === '想要！我要預約') {
+      document.getElementById('tyCtaBox').classList.add('show');
+    }
+
+    document.getElementById('thankYou').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
