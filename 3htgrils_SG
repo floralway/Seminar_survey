@@ -600,7 +600,7 @@
 
 <script>
   // ★ 貼上你的 Google Apps Script 網址
-  const SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyyNndXC61TUWxR-7dwtBTBEJDrath_EX3a1CusvHmHBXFQGB2HFOo1UDHeBLIV3g8QRA/exec';
 
   const answers = {
     age: null, q1: null, q2: null, q3: '', q4: [], q5: '',
